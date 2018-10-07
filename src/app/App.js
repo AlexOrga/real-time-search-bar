@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import BandList from '../components/BandList/BandList';
+import GetReggaeBands from '../DataRequests/GetReggaeBands';
 
 class App extends Component {
   state = {
+    search: "",
     reggae: [
       "The Abyssinians",
       "The Aces",
@@ -545,10 +547,38 @@ class App extends Component {
     ]
   }
 
+  userSearch = (e) => {
+    let tempSearch = {...this.state.search};
+    tempSearch = e.target.value;
+    this.setState({search: tempSearch});
+
+    const currentBands = this.state.reggae;
+    const tempBands = currentBands.filter(band => {
+      band.length < 5;
+    });
+    this.setState({reggae: tempBands});
+  }
+
+  componentDidMount = () => {
+    GetReggaeBands()
+      .then((res) => {
+        this.setState({reggae: res})
+        console.log("Success!");
+      })
+      .catch((err) => {
+        console.error("Error retrieving reggae band list");
+      })
+  }
+
   render() {
     return (
     <div>
       <h1>Hello There</h1>
+      <div className="search-container">
+        <input className="search-bar" type="text" placeholder="Search Band..."
+          onChange={this.userSearch}
+        />
+      </div>
       <div className="bandListComp">
         <BandList
           bands={this.state.reggae}

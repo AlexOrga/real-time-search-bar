@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import BandList from '../components/BandList';
+import BandList from '../components/BandList/BandList';
 
 class App extends Component {
   state = {
@@ -549,9 +549,11 @@ class App extends Component {
     return (
     <div>
       <h1>Hello There</h1>
-      <BandList
-        bands={this.state.reggae}
-      />
+      <div className="bandListComp">
+        <BandList
+          bands={this.state.reggae}
+        />
+      </div>
     </div>
     )
   }

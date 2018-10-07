@@ -1,3 +1,10 @@
 h1 {
   color: darkblue;
 }
+
+.bandListComp {
+  width: 20%;
+  margin: 100px auto 0;
+  background-color: aquamarine;
+  border: 2px solid black;
+}
